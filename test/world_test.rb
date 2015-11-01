@@ -3,27 +3,43 @@ require 'world'
 
 describe World do
   before do
-    @empty_world = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    @empty_world = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0]
+    ]
   end
 
   describe 'where only one cell lives' do
     before do
-      @world = World.new([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
+      @world = World.new(
+        [
+          [0, 0, 0],
+          [0, 1, 0],
+          [0, 0, 0]
+        ]
+      )
     end
 
-    it 'has no living cells left after first steps' do
-      @world.step
+    it 'has no living cells left after first ticks' do
+      @world.tick
       @world.state.must_equal(@empty_world)
     end
   end
 
   describe 'where two cells are living' do
     before do
-      @world = World.new([[0, 1, 0], [0, 1, 0], [0, 0, 0]])
+      @world = World.new(
+        [
+          [0, 1, 0],
+          [0, 1, 0],
+          [0, 0, 0]
+        ]
+      )
     end
 
-    it 'has no living cells left after first steps' do
-      @world.step
+    it 'has no living cells left after first ticks' do
+      @world.tick
       @world.state.must_equal(@empty_world)
     end
   end
@@ -40,7 +56,7 @@ describe World do
     end
 
     it 'does not change' do
-      @world.step
+      @world.tick
       @world.state.must_equal(@seed)
     end
   end
@@ -59,7 +75,7 @@ describe World do
     end
 
     it 'does not change' do
-      @world.step
+      @world.tick
       @world.state.must_equal(@seed)
     end
   end
@@ -88,7 +104,7 @@ describe World do
     end
 
     it 'oscillates' do
-      @world.step
+      @world.tick
       @world.state.must_equal(@result)
     end
   end
@@ -111,7 +127,7 @@ describe World do
     end
 
     it 'oscillates' do
-      @world.step
+      @world.tick
       @world.state.must_equal(@result)
     end
   end
@@ -127,7 +143,7 @@ describe World do
           [0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0]
         ]
-      @step1 =
+      @tick1 =
         [
           [0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0],
@@ -136,7 +152,7 @@ describe World do
           [0, 0, 1, 0, 0, 0],
           [0, 0, 0, 0, 0, 0]
         ]
-      @step2 =
+      @tick2 =
         [
           [0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0],
@@ -145,7 +161,7 @@ describe World do
           [0, 0, 1, 1, 0, 0],
           [0, 0, 0, 0, 0, 0]
         ]
-      @step3 =
+      @tick3 =
         [
           [0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0],
@@ -154,7 +170,7 @@ describe World do
           [0, 0, 1, 1, 0, 0],
           [0, 0, 0, 0, 0, 0]
         ]
-      @step4 =
+      @tick4 =
         [
           [0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0],
@@ -168,14 +184,14 @@ describe World do
     end
 
     it 'travels' do
-      @world.step
-      @world.state.must_equal(@step1)
-      @world.step
-      @world.state.must_equal(@step2)
-      @world.step
-      @world.state.must_equal(@step3)
-      @world.step
-      @world.state.must_equal(@step4)
+      @world.tick
+      @world.state.must_equal(@tick1)
+      @world.tick
+      @world.state.must_equal(@tick2)
+      @world.tick
+      @world.state.must_equal(@tick3)
+      @world.tick
+      @world.state.must_equal(@tick4)
     end
   end
 end

@@ -1,4 +1,3 @@
-require 'cell'
 require 'pry'
 
 # Main instance where the game take place
@@ -9,7 +8,7 @@ class World
     @state = seed
   end
 
-  def step
+  def tick
     new_state = state.map(&:dup)
     state.each_with_index do |row, y|
       row.each_with_index do |_cell, x|
